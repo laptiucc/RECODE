@@ -1,0 +1,142 @@
+<?php
+ob_start();
+@include_once 'includes/config.inc';
+
+if (is_readable('includes/'.$config['sqlserver'].'.inc')) {
+	require_once 'includes/'.$config['sqlserver'].'.inc';
+	$sql = @sql_connect($config['db']);
+}
+
+if (!function_exists('sql_connect') || empty($sql)) {
+	header("HTTP/1.0 302 Found");
+	header('Location: '.$config['server'].'error/noindex.html');
+	exit();
+}
+
+if (!empty($_COOKIE['user_id'])) session_start();
+
+function htmlheader($email=false, $details=false, $suggest=false) {
+	global $sql, $config;
+  header('X-Powered-By: ' . $config['powered']);
+	header('P3P: policyref="' .$config['server'] .'w3c/p3p.xml", CP="NOI DSP COR NID ADMa OUR NOR STA PRE"');
+//	header('Content-Type: application/xhtml+xml; charset=iso-8859-1');
+	print '<'.'?xml version="1.0" encoding="iso-8859-1"?'.">\n";
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+ <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=iso-8859-1" />
+    <meta name="keywords" content="recode2,recode-2,recoding,frameshift,database,mrna,codon,ribosome,sequence,translation,stimulatory,programmed,signal,recode,expression,genome,downstream,structure,dalgarno,gene,redefinition,protein,bypassing,biochemistry,selenocysteine,pyrolysine,hopping,ligand" />
+    <meta name="description" content="Database of translational recoding events. RECODE is a database of the utilisation of ribosomal rameshifting, translational bypassing and mRNA specific codon redefinition for gene expression." />
+    <title>Recode2 :: Database of translational recoding events</title>
+    <script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+<?php  if ($details || $email) { ?>
+    <script src="<?php print $config['server']; ?>scripts/jquery.js" type="text/javascript"></script>
+<?php } if ($details) { ?>
+    <script src="<?php print $config['server']; ?>scripts/jquery.lightbox.js" type="text/javascript"></script>
+<?php } if ($suggest) { ?>
+    <script src="<?php print $config['server']; ?>scripts/autosuggest.js" type="text/javascript"></script>
+<?php } if ($email) { ?>
+    <script src="<?php print $config['server']; ?>scripts/zulu.js" type="text/javascript"></script>
+<?php } ?>
+    <style type="text/css" title="currentStyle" media="all">
+/*<![CDATA[*/
+@import "<?php print $config['server']; ?>css/default.css";
+<?php if ($details) { ?>
+@import "<?php print $config['server']; ?>css/jquery.lightbox.css";
+<?php } if ($suggest) { ?>
+@import "<?php print $config['server']; ?>css/autosuggest.css";
+<?php } ?>
+/*]]>*/
+    </style>
+    <link rel="Shortcut Icon" type="image/x-icon" href="<?php print $config['server']; ?>favicon.ico" />
+    <link rel="bookmark" href="<?php print $config['server']; ?>" title="Recode Database" type="application/xhtml+xml" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Recode2 search" href="<?php print $config['server']; ?>recode2.xml" />
+    <script type="text/javascript">
+/*<![CDATA[*/
+try {
+var pageTracker = _gat._getTracker("<?php print $config['google']; ?>");
+pageTracker._trackPageview();
+} catch(err) {}
+/*]]>*/
+    </script>
+  </head>
+  <body>
+  <div id="wrapper">
+    <div id="content">
+      <h1>Recode <small>v. 2.0</small> / Database of translational recoding events.</h1>
+      <div id="menu">
+        <a href="<?php print $config['server']; ?>" title="Search">Search</a>
+<?php if (!empty($_SESSION['login']) && !empty($_SESSION['login']['rights']) && ($_SESSION['login']['rights']>=3)) { print '        <a href="' . $config['server'] . "import\" title=\"Add a new recoding event\">Add</a>\n"; } ?>
+        <a href="<?php print $config['server']; ?>download" title="Download">Download</a>
+        <a href="<?php print $config['server']; ?>publication" title="Publication">Publications</a>
+        <a href="<?php print $config['server']; ?>contributors" title="Contributors">Contributors</a>
+        <a href="<?php print $config['server']; ?>resources" title="Resources">Resources</a>
+        <a href="<?php print $config['server']; ?>about" title="About">About</a>
+        <a href="<?php print $config['server']; ?>sign<?php print (!empty($_SESSION['login'])) ? 'out' : 'in'; ?>" title="Sign-<?php print (!empty($_SESSION['login'])) ? 'out' : 'in'; ?>">Sign-<?php print (!empty($_SESSION['login'])) ? 'out' : 'in'; ?></a>
+      </div>
+<?php
+}
+
+function htmlfooter() {
+	global $sql, $config;
+?>
+      <div id="footer">
+        <p>&copy;2009<?php print ((date('Y')!='2009')?'-'.date('Y'):''); ?> UCC | The database is licenced under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Licence</a> | <a href="<?php print $config['server']; ?>policy">Policy</a></p>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>
+<?php
+}
+
+function get_switch($id) {
+	global $config;
+	if (isset($_GET[$id])) {
+		if ($_GET[$id]=='true') { setcookie($id, true, 0, $config['path']); }
+		else { setcookie($id, false, 0, $config['path']); }
+		return ($_GET[$id]=='true') ? true : false;
+	}
+	return !empty($_COOKIE) && isset($_COOKIE[$id]) && $_COOKIE[$id];
+}
+
+
+function set_pref($pref, $status=false) {
+	global $config;
+	setcookie($pref, $status, 0, $config['path']);
+	return $status;
+}
+
+function get_pref($pref) {
+	if (!empty($_COOKIE[$pref])) {
+		return $_COOKIE[$pref];
+	}
+	return false;
+}
+
+class XMLParser {
+	var $stack = array();
+
+	function startTag($parser, $name, $attrs) {
+		$tag = array('name'=>$name, 'attrs'=>$attrs);
+		array_push($this->stack, $tag);
+	}
+
+	function cdata($parser, $cdata) {
+		if (trim($cdata))
+			if (isset($this->stack[count($this->stack)-1]['cdata'])) {
+				$this->stack[count($this->stack)-1]['cdata'].=$cdata;
+			} else {
+			$this->stack[count($this->stack)-1]['cdata']=$cdata;
+		}
+	}
+
+	function endTag($parser, $name) {
+		$this->stack[count($this->stack)-2]['children'][] = $this->stack[count($this->stack)-1];
+		array_pop($this->stack);
+	}
+
+}
+?>

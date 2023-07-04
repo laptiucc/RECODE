@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="analyse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="program" />
+        <xs:element ref="parameter" minOccurs="0" />
+        <xs:element ref="date" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="analysis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="analyse" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="analysis-id">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="annotation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="modification" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="segment" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="asite">
+    <xs:complexType mixed="true">
+      <xs:attribute name="codon" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="author">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="base-id-3p">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="base-id-5p">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="base-pair">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="base-id-5p" />
+        <xs:element ref="base-id-3p" />
+        <xs:element ref="bond-orientation" minOccurs="0" />
+        <xs:element ref="strand-orientation" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="bond-orientation">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="book-title">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="brackets">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="class">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="codon">
+    <xs:complexType mixed="true">
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="comment">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="complex">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="segment" />
+        <xs:element ref="brackets" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="database-id">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="date">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="day" minOccurs="0" />
+        <xs:element ref="month" minOccurs="0" />
+        <xs:element ref="year" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="day">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="description">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="doi">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="domain">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="downstream">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="editor">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="esite">
+    <xs:complexType mixed="true">
+      <xs:attribute name="codon" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="family">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="function">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="genus">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="helix">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stem" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="identity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" />
+        <xs:element ref="description" minOccurs="0" />
+        <xs:element ref="taxonomy" maxOccurs="unbounded" />
+        <xs:element ref="reference-id" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="analysis-id" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="database-id" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="issue">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="journal">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="kingdom">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="length">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="model">
+    <xs:complexType mixed="true">
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="modification">
+    <xs:complexType mixed="true">
+      <xs:attribute name="position" type="xs:string" use="required" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="molecules">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sequence" maxOccurs="unbounded" />
+        <xs:element ref="structure" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="product" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="month">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="name">
+    <xs:complexType mixed="true">
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="order">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="pages">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="parameter">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="phylum">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="position">
+    <xs:complexType mixed="true">
+      <xs:attribute name="length" type="xs:string" use="required" />
+      <xs:attribute name="before" type="xs:string" use="optional" />
+      <xs:attribute name="after" type="xs:string" use="optional" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" />
+        <xs:element ref="seq-data" />
+        <xs:element ref="modification" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="recoding-event" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="sequence-reading" type="xs:string" use="required" />
+      <xs:attribute name="sequence-id" type="xs:IDREF" use="required" />
+      <xs:attribute name="length" type="xs:string" use="optional" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="program">
+    <xs:complexType mixed="true">
+      <xs:attribute name="version" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="pseudoknot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="helix" />
+        <xs:element ref="helix" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="psite">
+    <xs:complexType mixed="true">
+      <xs:attribute name="codon" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="pubmed-id">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="recodeml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="identity" />
+        <xs:element ref="molecules" />
+        <xs:element ref="recodings" maxOccurs="unbounded" />
+        <xs:element ref="references" minOccurs="0" />
+        <xs:element ref="analysis" minOccurs="0" />
+        <xs:element ref="revisions" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="version" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0.3" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="recoding">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="type" />
+        <xs:element ref="position" />
+        <xs:element ref="codon" minOccurs="0" />
+        <xs:element ref="upstream" minOccurs="0" />
+        <xs:element ref="esite" minOccurs="0" />
+        <xs:element ref="asite" minOccurs="0" />
+        <xs:element ref="psite" minOccurs="0" />
+        <xs:element ref="downstream" minOccurs="0" />
+        <xs:element ref="model" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="function" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="status" type="xs:string" use="optional" />
+      <xs:attribute name="experimental" type="xs:string" use="optional" />
+      <xs:attribute name="analysis-id" type="xs:IDREF" use="optional" />
+      <xs:attribute name="protein-id" type="xs:IDREF" use="required" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="recoding-event">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="recodings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="recoding" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="reference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="author" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="title" />
+        <xs:choice>
+          <xs:sequence>
+            <xs:element ref="journal" />
+            <xs:element ref="volume" minOccurs="0" />
+            <xs:element ref="issue" minOccurs="0" />
+            <xs:element ref="pubmed-id" minOccurs="0" />
+          </xs:sequence>
+          <xs:sequence>
+            <xs:element ref="book-title" />
+            <xs:element ref="editor" minOccurs="0" />
+          </xs:sequence>
+        </xs:choice>
+        <xs:element ref="pages" minOccurs="0" />
+        <xs:element ref="doi" minOccurs="0" />
+        <xs:element ref="date" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="reference-id">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="references">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="reference" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="revision">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="comment" minOccurs="0" />
+        <xs:element ref="date" />
+        <xs:element ref="author" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="revisions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="revision" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="segment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" minOccurs="0" />
+        <xs:element ref="base-id-5p" />
+        <xs:choice>
+          <xs:element ref="base-id-3p" />
+          <xs:element ref="length" />
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="seq-data">
+    <xs:complexType mixed="true">
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="sequence">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" minOccurs="0" />
+        <xs:element ref="seq-data" />
+        <xs:element ref="annotation" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="circular" use="optional">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="true" />
+            <xs:enumeration value="false" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="strand" type="xs:string" use="optional" />
+      <xs:attribute name="type" type="xs:string" use="required" />
+      <xs:attribute name="length" type="xs:string" use="optional" />
+      <xs:attribute name="genetic" type="xs:string" use="optional" />
+      <xs:attribute name="coordinates" type="xs:string" use="optional" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="single-strand">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="segment" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="species">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="stem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="base-id-5p" />
+        <xs:element ref="base-id-3p" />
+        <xs:element ref="length" />
+      </xs:sequence>
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="strain">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="strand-orientation">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="structure">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="base-pair" />
+        <xs:element ref="helix" />
+        <xs:element ref="pseudoknot" />
+        <xs:element ref="single-strand" />
+        <xs:element ref="complex" />
+      </xs:choice>
+      <xs:attribute name="sequence-id" type="xs:IDREF" use="required" />
+      <xs:attribute name="type" type="xs:string" use="required" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+      <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="taxonomy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name" minOccurs="0" />
+        <xs:element ref="domain" minOccurs="0" />
+        <xs:element ref="kingdom" minOccurs="0" />
+        <xs:element ref="phylum" minOccurs="0" />
+        <xs:element ref="class" minOccurs="0" />
+        <xs:element ref="order" minOccurs="0" />
+        <xs:element ref="family" minOccurs="0" />
+        <xs:element ref="genus" minOccurs="0" />
+        <xs:element ref="species" />
+        <xs:element ref="strain" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="taxonid" type="xs:string" use="optional" />
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="title">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="type">
+    <xs:complexType mixed="true">
+      <xs:attribute name="comment" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="upstream">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="volume">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+  <xs:element name="year">
+    <xs:complexType mixed="true" />
+  </xs:element>
+
+</xs:schema>

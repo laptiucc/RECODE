@@ -1,0 +1,9 @@
+<Html>
+	<head>
+		<title>Codon Logo</title>
+	</head>
+	<body>
+		CodonLogo can be found under Motif Tools in <a href="http://recode.ucc.ie:8080"> this</a> instance of galaxy.<br />
+		Source code is available<a href='codonlogo.tar.gz'>here</a>
+	</body>
+</html>

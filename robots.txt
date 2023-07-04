@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /images/
+Sitemap: http://recode.ucc.ie/sitemap.xml.gz

@@ -1,0 +1,48 @@
+#<Directory "/home/DATA/www/recode">
+
+<files ~ "\.inc$">
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</files>
+
+RewriteEngine On
+#RewriteOptions Inherit
+
+RewriteBase /
+
+RewriteRule ^recode2.xml$              opensearch.php              [L,T=application/opensearchdescription+xml]
+RewriteRule ^index                     index.php                   [L]
+RewriteRule ^about                     about.php                   [L]
+RewriteRule ^help                      help.php                    [L]
+RewriteRule ^export/([^/]+)            export.php?export=$1        [L,T=application/xml]
+RewriteRule ^sequence/([^/]+)          export.php?sequence=$1      [L]
+RewriteRule ^rna/([^/]+)               rna.php?rna=$1              [L]
+RewriteRule ^browse/([^/]+)/(.+)       browse.php?a=$1&q=$2&%{QUERY_STRING}  [L]
+RewriteRule ^browse/([^/]+)            browse.php?a=$1             [L]
+RewriteRule ^browse                    browse.php                  [L]
+RewriteRule ^search                    search.php                  [L]
+RewriteRule ^add                       add.php                     [L]
+RewriteRule ^newaccount                newaccount.php              [L]
+RewriteRule ^new                       new.php                     [L]
+RewriteRule ^import                    import.php                  [L]
+RewriteRule ^download                  download.php                [L]
+RewriteRule ^recode/([^/]+)            details.php?recode=$1&%{QUERY_STRING}  [L]
+RewriteRule ^policy                    policy.php                  [L]
+RewriteRule ^publications/star/(.+)    publications.php?star=$1    [L]
+RewriteRule ^publications/remove/(.+)  publications.php?remove=$1  [L]
+RewriteRule ^publication               publications.php            [L]
+RewriteRule ^resources/remove/(.+)     resources.php?remove=$1     [L]
+RewriteRule ^resource                  resources.php               [L]
+RewriteRule ^contributors/remove/(.+)  contributors.php?remove=$1  [L]
+RewriteRule ^contributor               contributors.php            [L]
+RewriteRule ^signin                    signin.php                  [L]
+RewriteRule ^signout                   signout.php                 [L]
+RewriteRule ^profile                   profile.php                 [L]
+RewriteRule ^change                    profile.php?profile=change  [L]
+RewriteRule ^admin/users/([^/]+)       admin.php?admin=users&user=$1&%{QUERY_STRING}  [L]
+RewriteRule ^admin/(users|entries|comments)  admin.php?admin=$1&%{QUERY_STRING}  [L]
+RewriteRule ^dtd(/index.*|/)?$         dtd.php                     [L]
+RewriteRule ^RecodeML.dtd$             dtd.php                     [L,R=301]
+
+#</Directory>

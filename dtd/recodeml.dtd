@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- RecodeML: The root of any RecodeML document -->
+<!ELEMENT recodeml  (identity, molecules, recodings+, references?, analysis?, revisions?)>
+<!ATTLIST recodeml
+  version (0.3)  #REQUIRED>
+
+<!-- Identity -->
+<!ELEMENT identity  (name, description?, taxonomy+, reference-id*, analysis-id*, database-id*)>
+<!ATTLIST identity
+  comment  CDATA  #IMPLIED>
+<!ELEMENT description  (#PCDATA)>
+<!ELEMENT taxonomy  (name?, domain?, kingdom?, phylum?, class?, order?, family?, genus?, species, strain?)>
+<!ATTLIST taxonomy
+  taxonid  CDATA  #IMPLIED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT domain  (#PCDATA)>
+<!ELEMENT kingdom  (#PCDATA)>
+<!ELEMENT phylum  (#PCDATA)>
+<!ELEMENT class  (#PCDATA)>
+<!ELEMENT order  (#PCDATA)>
+<!ELEMENT family  (#PCDATA)>
+<!ELEMENT genus  (#PCDATA)>
+<!ELEMENT species  (#PCDATA)>
+<!ELEMENT strain  (#PCDATA)>
+<!ELEMENT reference-id  (#PCDATA)>
+<!ATTLIST reference-id
+  name  CDATA  #REQUIRED>
+<!ELEMENT analysis-id  (#PCDATA)>
+<!ATTLIST analysis-id
+  name  CDATA  #REQUIRED>
+<!ELEMENT database-id  (#PCDATA)>
+<!ATTLIST database-id
+  name  CDATA  #REQUIRED>
+
+<!-- Molecules -->
+<!ELEMENT molecules  (sequence+, structure*, product+)>
+<!ATTLIST molecules
+  comment  CDATA  #IMPLIED>
+<!ELEMENT sequence  (name?, seq-data, annotation?)>
+<!ATTLIST sequence
+  id  ID  #REQUIRED
+  type  CDATA  #REQUIRED
+  strand  CDATA  #IMPLIED
+  length  CDATA  #IMPLIED
+  coordinates  CDATA  #IMPLIED
+  genetic  CDATA  #IMPLIED
+  circular  (true | false)  #IMPLIED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT seq-data  (#PCDATA)>
+<!ATTLIST seq-data
+  comment  CDATA  #IMPLIED>
+<!ELEMENT annotation  (modification*, segment*)>
+<!ATTLIST annotation
+  comment  CDATA  #IMPLIED>
+<!ELEMENT modification  (#PCDATA)>
+<!ATTLIST modification
+  id  ID  #REQUIRED  
+  position  CDATA  #REQUIRED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT segment  (name?, base-id-5p, (base-id-3p | length))>
+<!ATTLIST segment
+  comment  CDATA  #IMPLIED>
+<!ELEMENT length  (#PCDATA)>
+<!ELEMENT product  (name, seq-data, modification*, recoding-event*)>
+<!ATTLIST product
+  id  ID  #REQUIRED
+  sequence-id  IDREF  #REQUIRED
+  sequence-reading  CDATA  #REQUIRED
+  length  CDATA  #IMPLIED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT recoding-event  (#PCDATA)>
+<!ELEMENT structure  (base-pair | helix | pseudoknot | single-strand | complex)*>
+<!ATTLIST structure
+  id  ID  #REQUIRED
+  sequence-id  IDREF  #REQUIRED
+  type  CDATA  #REQUIRED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT base-pair  (base-id-5p, base-id-3p, bond-orientation?, strand-orientation?)>
+<!ATTLIST base-pair
+  comment  CDATA  #IMPLIED>
+<!ELEMENT bond-orientation  (#PCDATA)>
+<!ELEMENT strand-orientation  (#PCDATA)>
+<!ELEMENT helix  (stem*)>
+<!ATTLIST helix
+  comment  CDATA  #IMPLIED>
+<!ELEMENT stem  (base-id-5p, base-id-3p, length)>
+<!ATTLIST stem
+  comment  CDATA  #IMPLIED>
+<!ELEMENT pseudoknot  (helix, helix)>
+<!ATTLIST pseudoknot
+  comment  CDATA  #IMPLIED>
+<!ELEMENT single-strand  (segment)>
+<!ATTLIST single-strand
+  comment  CDATA  #IMPLIED>
+<!ELEMENT complex  (segment, brackets)>
+<!ATTLIST complex
+  comment  CDATA  #IMPLIED>
+<!ELEMENT brackets  (#PCDATA)>
+  
+<!-- References -->
+<!ELEMENT references  (reference*)>
+<!ATTLIST references
+  comment  CDATA  #IMPLIED>
+<!ELEMENT reference  (author*, title, ( (journal,  volume?, issue?, pubmed-id?) | (book-title, editor?) ) , pages?, doi?, date?)*>
+<!ATTLIST reference
+  id  ID  #REQUIRED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT title  (#PCDATA)>
+<!ELEMENT journal  (#PCDATA)>
+<!ELEMENT pubmed-id  (#PCDATA)>
+<!ELEMENT doi  (#PCDATA)>
+<!ELEMENT book-title  (#PCDATA)>
+<!ELEMENT editor  (#PCDATA)>
+<!ELEMENT volume  (#PCDATA)>
+<!ELEMENT issue  (#PCDATA)>
+<!ELEMENT pages  (#PCDATA)>
+
+<!-- Recodings -->
+<!ELEMENT recodings  (recoding*)>
+<!ATTLIST recodings
+    comment  CDATA  #IMPLIED>
+<!ELEMENT recoding  (type, position, codon?, upstream?, esite?, psite?, 
+asite?, downstream?, model*, function?)>
+<!ATTLIST recoding
+  id  ID  #REQUIRED
+  protein-id  IDREF  #REQUIRED
+  analysis-id  IDREF  #IMPLIED
+  experimental  CDATA  #IMPLIED
+  status  CDATA  #IMPLIED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT type  (#PCDATA)>
+<!ATTLIST type
+  comment  CDATA  #IMPLIED>
+<!ELEMENT position  (#PCDATA)>
+<!ATTLIST position
+  length CDATA  #REQUIRED
+  before CDATA  #IMPLIED
+  after CDATA #IMPLIED
+  comment  CDATA #IMPLIED>
+<!ELEMENT codon  (#PCDATA)>
+<!ATTLIST codon
+  comment  CDATA #IMPLIED>
+<!ELEMENT upstream  (#PCDATA)>
+<!ELEMENT esite  (#PCDATA)>
+<!ATTLIST esite
+  codon  CDATA  #IMPLIED>
+<!ELEMENT asite  (#PCDATA)>
+<!ATTLIST asite
+  codon  CDATA  #IMPLIED>
+<!ELEMENT psite  (#PCDATA)>
+<!ATTLIST psite
+  codon  CDATA  #IMPLIED>
+<!ELEMENT downstream  (#PCDATA)>
+<!ELEMENT model  (#PCDATA)>
+<!ATTLIST model
+  comment  CDATA  #IMPLIED>
+<!ELEMENT function  (#PCDATA)>
+
+<!-- Analysis -->
+<!ELEMENT analysis  (analyse*)>
+<!ATTLIST analysis 
+  comment  CDATA  #IMPLIED>
+<!ELEMENT analyse  (program, parameter?, date)>
+<!ATTLIST analyse
+  id  ID  #REQUIRED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT program  (#PCDATA)>
+<!ATTLIST program
+  version  CDATA  #IMPLIED>
+<!ELEMENT parameter  (#PCDATA)>
+<!ATTLIST parameter
+  name  CDATA  #REQUIRED>
+
+<!-- Revisions -->
+<!ELEMENT revisions  (revision*)>
+<!ATTLIST revisions
+  comment  CDATA  #IMPLIED>
+<!ELEMENT revision  (comment?, date, author?)>
+<!ATTLIST revision 
+  id  ID  #REQUIRED
+  comment  CDATA  #IMPLIED>
+<!ELEMENT comment  (#PCDATA)>
+
+<!ELEMENT name  (#PCDATA)>
+<!ATTLIST name
+  comment  CDATA  #IMPLIED>
+<!ELEMENT base-id-5p  (#PCDATA)>
+<!ELEMENT base-id-3p  (#PCDATA)>
+<!ELEMENT author  (#PCDATA)>
+<!ELEMENT date  (day?, month?, year)>
+<!ELEMENT day  (#PCDATA)>
+<!ELEMENT month  (#PCDATA)>
+<!ELEMENT year  (#PCDATA)>

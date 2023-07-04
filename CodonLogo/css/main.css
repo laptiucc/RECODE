@@ -1,0 +1,111 @@
+body {
+     margin: 0px;
+     padding: 0px;
+     background: white;
+     color: black;
+     line-height: 150%;
+     display: inline;
+}
+
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 150px;
+  margin-right: 150px;
+  text-align: justify;
+  font-family: times;
+	text-indent: 1cm;
+}
+
+p.menu {
+       margin-left: 130px;
+       margin-right: 130px;
+       text-align: center;
+       font-family: cursive;
+       font-size: 150%;
+       font-weight: bold;
+       word-spacing: 1em;
+	text-indent: 0px;
+}
+
+p.reference {
+	margin-left: 190px;
+	text-indent: -40px; 
+}
+
+table.people {
+	margin-left: 150px;
+	margin-right: 150px;
+	text-align: justify;
+}
+
+img.people {
+	width: 100px;
+	float: left;
+	padding-right: 10px;
+}
+
+strong	{font-weight: 600;}
+
+address {
+	margin-left: 150px;
+	margin-right: 150px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	color: gray;
+	font-size: 75%;
+	font-style: oblique;
+}
+
+img.footer {
+	float: left;
+	padding-right:10px;
+}
+
+img.logo {
+	float: right;
+	margin-right: 150px;
+}
+
+a {color: black;}
+
+a:hover {color:red;}
+
+a.menu {text-decoration: none;}
+
+h1 {
+   color: gray;
+   margin-top: 0px;
+   margin-bottom: 10px;
+   margin-left: 180px;
+   margin-right: 150px;
+   padding-top: 30px;
+   font-size: 130%;
+   font-weight: bold;
+}
+
+p.quote {
+	color: black;
+	margin-left: 55%;
+	margin-right: 200px;
+	margin-bottom: 0px;
+	margin-top: 10px;
+	font-size: 80%;
+	text-align: justify;
+	font-style: oblique;
+	text-indent: 0px;  	
+}
+
+p.sig {
+	color: black;
+	margin-left: 55%;
+	margin-right: 200px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	font-size: 80%;
+	font-weight: bold;
+	text-align: right;
+}
+
+
+

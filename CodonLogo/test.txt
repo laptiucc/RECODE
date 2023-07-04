@@ -1,0 +1,1 @@
+track type=bam bigDataUrl=http://recode.ucc.ie/CodonLogo/Brain_cDNA.1.sorted.bam
